@@ -48,7 +48,7 @@ session_start();
             <img src="image/newlogo.png" style="margin-left: 20px;margin-top: 10px;height:40px; width: 40px;float: left;" title="home">
             <img src="image/message.png" style="float: left; width:30px;height: 30px;margin-left: 20px; margin-top: 15px; " title="message">
             <img src="image/notification.png" style="float: left; width:30px;height: 30px;margin-left: 20px; margin-top: 15px; " title="notification">
-            <a href="index.php" style=" margin-top: 25px; margin-right:70px;float: right;">logout</a>
+            <a href="logout.php" style=" margin-top: 25px; margin-right:70px;float: right;">logout</a>
             <a href="profile.php" style="margin-top: 25px; margin-right:15px;float: right;"><?php echo $_SESSION['username']; ?></a>
             <img src="<?php echo$info['photo']; ?>" style="width: 30px; height: 30px;margin-right:10px;float: right;margin-top: 20px;">
             <a href="home.php" style=" margin-right:15px;margin-top: 25px;float: right;" >home</a>

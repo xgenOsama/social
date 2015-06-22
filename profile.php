@@ -133,7 +133,7 @@ session_start();
                     <li><a href="#">connect us</a></li>
                 </ul>
             </div>
-            <a href="index.php" style="float: right; margin-top: 20px;margin-right: 20px;">logout</a>
+            <a href="logout.php" style="float: right; margin-top: 20px;margin-right: 20px;">logout</a>
             <a href="profile.php" style="margin-top: 20px; margin-right:15px;float: right;"><?php echo$_SESSION['username']; ?></a>
             <img src="<?php echo$info['photo']; ?>" style="width: 30px; height: 30px;margin-right:10px;float: right;margin-top: 15px;">
             <a href="home.php" style=" margin-right:15px;margin-top: 20px;float: right;" >home</a>
@@ -281,7 +281,6 @@ session_start();
             $my_posts = "select * from posts where user_id = '" . $user_id . "';";
             $get_posts = mysqli_query($db_conn, $my_posts);
             while ($p = mysqli_fetch_array($get_posts)) :
-                echo 'hello';
                 $d = $p['date'];
                 $po = $p['post'];
                 $u = $p['upload'];
