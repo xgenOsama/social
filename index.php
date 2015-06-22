@@ -1,6 +1,8 @@
 <?php
 include './db_connect.php';
 session_start();
+$session_expired = 360000;
+session_set_cookie_params($session_expired);
 ?>
 <html>
     <head>
