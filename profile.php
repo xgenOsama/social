@@ -213,7 +213,7 @@ session_start();
                 ?>
                 <div style="border-bottom: 1px; height: 60px ;">
                     <a href= "friend_profile.php?id=<?php echo$id_of_friend; ?> "style="margin-left: 20px;"> <?php echo $name_of_friend; ?></a>
-                    <img src="<?php echo $photo_of_friend; ?>" style="height:50px;width: 50px;border-radius: 10px; float: right;">
+                    <img src="<?php echo "uploads/".$photo_of_friend; ?>" style="height:50px;width: 50px;border-radius: 10px; float: right;">
                 </div>
                 <?php
             endwhile;
