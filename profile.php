@@ -135,12 +135,12 @@ session_start();
             </div>
             <a href="logout.php" style="float: right; margin-top: 20px;margin-right: 20px;">logout</a>
             <a href="profile.php" style="margin-top: 20px; margin-right:15px;float: right;"><?php echo$_SESSION['username']; ?></a>
-            <img src="<?php echo$info['photo']; ?>" style="width: 30px; height: 30px;margin-right:10px;float: right;margin-top: 15px;">
+            <img src="<?php echo 'uploads/'.$info['photo']; ?>" style="width: 30px; height: 30px;margin-right:10px;float: right;margin-top: 15px;">
             <a href="home.php" style=" margin-right:15px;margin-top: 20px;float: right;" >home</a>
 
         </div>
         <div id="cover" style=" background:url('<?php echo $info['cover'] ?>'); background-size: cover;">
-            <div id="profile_pic" style=" background:url('<?php echo $info['photo'] ?>'); background-size: cover;"> </div>
+            <div id="profile_pic" style=" background:url('<?php echo 'uploads/'.$info['photo'] ?>'); background-size: cover;"> </div>
             <button class="btn btn-info"style="margin-left: 30px;width: 200px ;border-radius: 20px; " data-toggle="modal" data-target=".bs-example-modal-sm">Upload photo</button>
                         <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
                             <div class="modal-dialog modal-sm">
