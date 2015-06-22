@@ -206,16 +206,15 @@ session_start();
                 $friends_query = mysqli_query($db_conn, $get_me_friend_info);
                 while ($piece_of_info = mysqli_fetch_array($friends_query)) :
                     $name_of_friend = $piece_of_info['username'];
-<<<<<<< HEAD
                     if ($piece_of_info['photo'] != "avatar.jpg") {
                         $photo_of_friend = "uploads/" . $piece_of_info['photo'];
                     } else {
-                        $photo_of_friend = "image/" . $piece_of_info['photo'];
+                        $photo_of_friend =  $piece_of_info['photo'];
                     } $id_of_friend = $piece_of_info['id'];
-=======
+
                     $photo_of_friend = 'uploads/'.$piece_of_info['photo'];
                     $id_of_friend = $piece_of_info['id'];
->>>>>>> 427ca8cb4de169547e2695ea4dabee3e21171339
+
 
                 endwhile;
                 ?>
@@ -300,7 +299,7 @@ session_start();
                         <label style="float: left; margin-left: 20px;margin-top: 10px;"> <?php echo 'post at: ' . "$d"; ?></label><br>
                         <lable>
                             <p style=" float: left; margin-left: 10px;width: 60%; margin-top: 5%;"><?php echo"$po"; ?></p>
-                            <img src="<?php echo 'uploads/' . $u ?>" style="height:180px;width: 160px; float: right;">
+                            <img src="<?php echo  $u ?>" style="height:180px;width: 160px; float: right;">
                         </lable>
                     </label>
                     <a href="#" style="color:blue; float: left; margin-left: 10px; " onclick="changeStyle(this)" id="<?php echo $id_post; ?>">like</a>

@@ -9,11 +9,7 @@ while ($friend_request = mysqli_fetch_array($li)) {
     $y = "select * from users where id =" . $friend_request['sender_id'];
     $z = mysqli_query($db_conn, $y);
     $x = mysqli_fetch_array($z);
-    if ($x['photo'] != "avatar.jpg") {
-        $friend_photo = "uploads/" . $x['photo'];
-    } else {
-        $friend_photo = "image/" . $x['photo'];
-    }
+    $friend_photo = $x['photo'];
     $friend_name = $x['username'];
     $friend_id = $x['id'];
     $output = "<div class = \"well\" style = \"border-radius: 15px; height: 115px; width:230px;  float: right;\" id=div" . $friend_id . " >
