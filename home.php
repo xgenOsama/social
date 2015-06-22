@@ -50,7 +50,7 @@ session_start();
             <img src="image/notification.png" style="float: left; width:30px;height: 30px;margin-left: 20px; margin-top: 15px; " title="notification">
             <a href="logout.php" style=" margin-top: 25px; margin-right:70px;float: right;">logout</a>
             <a href="profile.php" style="margin-top: 25px; margin-right:15px;float: right;"><?php echo $_SESSION['username']; ?></a>
-            <img src="<?php echo'uploads/'.$info['photo']; ?>" style="width: 30px; height: 30px;margin-right:10px;float: right;margin-top: 20px;">
+            <img src="<?php echo'uploads/' . $info['photo']; ?>" style="width: 30px; height: 30px;margin-right:10px;float: right;margin-top: 20px;">
             <a href="home.php" style=" margin-right:15px;margin-top: 25px;float: right;" >home</a>
             <div id="find_friends" style="overflow-y:auto; width: 250px; height: 70px;margin-right:150px;float: right;border-radius: 10px;"></div>
             <input type="text" style=" margin-right:20px;margin-top: 20px;float: right;width: 330px; border-radius:10px;" placeholder="   search" onkeyup="find_friend(this.value);">
@@ -69,7 +69,7 @@ session_start();
                 ?> 
                 <div style=" height: 90px; width:150px;border-radius: 10px; float: left;margin-right: 30px;margin-bottom: 10px; overflow-y:auto;" id="<?php echo $id; ?>">
                     <a href="friend_profile.php?id=<?php echo$id; ?>" style=" float: right; margin-top: 30px; "><?php echo $username; ?></a>
-                    <img src="<?php echo 'uploads/'.$photo ?>" style="height:80px;width: 80px;border-radius: 10px; float: left;">
+                    <img src="<?php echo 'uploads/' . $photo ?>" style="height:80px;width: 80px;border-radius: 10px; float: left;">
                 </div>
                 <?php
             endwhile;
@@ -86,7 +86,11 @@ session_start();
                 $friends_query = mysqli_query($db_conn, $get_me_friend_info);
                 while ($piece_of_info = mysqli_fetch_array($friends_query)) :
                     $name_of_friend = $piece_of_info['username'];
-                    $photo_of_friend = $piece_of_info['photo'];
+                    if ($piece_of_info['photo'] != "avatar.jpg") {
+                        $photo_of_friend = "uploads/".$piece_of_info['photo'];
+                    } else {
+                        $photo_of_friend = "image/".$piece_of_info['photo'];
+                    }
                     $id_of_friend = $piece_of_info['id'];
                 endwhile;
                 ?>
@@ -174,12 +178,12 @@ session_start();
                 ?> 
                 <div class="well" style="border-radius: 20px; margin-top: 20px; width: 98%; height: 40%;overflow-y:auto;">
                     <div style="height:90%; width: 95%;margin-left: 10px; ">
-                        <img src="<?php echo 'uploads/'.$photo_src ?>" style="height:40px;width: 40px; float: left;">
+                        <img src="<?php echo 'uploads/' . $photo_src ?>" style="height:40px;width: 40px; float: left;">
                         <a href="profile.php" style="margin-top: 7px; float: left; margin-right: 4px; margin-left: 4px;"><?php echo$username_of_friend ?></a>
                         <p style="float: left;margin-top: 7px;"> <?php echo 'post at: ' . "$d"; ?></p><br>
                         <div>
                             <p style=" float: left; margin-left: 10px;width: 60%; margin-top: 5%;"><?php echo"$po"; ?></p>
-                            <img src="<?php echo $u ?>" style="height:180px;width: 160px; float: right;">
+                            <img src="<?php echo 'uploads/' . $u ?>" style="height:180px;width: 160px; float: right;">
                         </div>
                     </div>
                     <a href="#" style="color:blue; float: left; margin-left: 10px; " onclick="changeStyle('l1')" id="<?php echo $id_post; ?>">like</a>
