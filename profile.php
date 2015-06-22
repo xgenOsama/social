@@ -206,14 +206,14 @@ session_start();
                 $friends_query = mysqli_query($db_conn, $get_me_friend_info);
                 while ($piece_of_info = mysqli_fetch_array($friends_query)) :
                     $name_of_friend = $piece_of_info['username'];
-                    $photo_of_friend = $piece_of_info['photo'];
+                    $photo_of_friend = 'uploads/'.$piece_of_info['photo'];
                     $id_of_friend = $piece_of_info['id'];
 
                 endwhile;
                 ?>
                 <div style="border-bottom: 1px; height: 60px ;">
                     <a href= "friend_profile.php?id=<?php echo$id_of_friend; ?> "style="margin-left: 20px;"> <?php echo $name_of_friend; ?></a>
-                    <img src="<?php echo "uploads/".$photo_of_friend; ?>" style="height:50px;width: 50px;border-radius: 10px; float: right;">
+                    <img src="<?php echo $photo_of_friend; ?>" style="height:50px;width: 50px;border-radius: 10px; float: right;">
                 </div>
                 <?php
             endwhile;

@@ -117,7 +117,8 @@ session_start();
             <div id="search" class="m">search</div>
         </div>
         <div id="cover" style=" background:url('<?php echo $friend_info['cover'] ?>'); background-size: cover;">
-            <div id="profile_pic" style=" background:url('<?php echo 'uploads\\'.$friend_info['photo'] ?>'); background-size: cover;"> </div>
+            <?php $uploads='uploads/'?>
+            <div id="profile_pic" style=" background:url('<?php echo $uploads.$friend_info['photo'] ?>'); background-size: cover;"> </div>
             <input id="send_request" class="btn btn-info" type="button" value="<?php
             //check relation
             $check_friend = "select * from friends_req where sender_id = '" . $_SESSION['user_id'] . "' and recever_id='" . $_SESSION['id_friend'] .
