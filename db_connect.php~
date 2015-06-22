@@ -1,0 +1,12 @@
+<?php
+if(file_exists('/home/gen/')){
+$user = 'g33k';
+}else{
+$user = 'nour';
+}
+$db_conn = mysqli_connect("localhost", "root", $name, "social");
+if (mysqli_connect_errno()) {
+    return mysqli_connect_error();
+}
+?>
+
