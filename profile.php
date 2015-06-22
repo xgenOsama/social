@@ -288,7 +288,7 @@ session_start();
                 ?> 
                 <div class="well" id="post">
                     <label style="height:90%; width: 95%;margin-left: 10px;">
-                        <img src="<?php echo $info['photo'] ?>" style="height:40px;width: 40px; float: left;">
+                        <img src="<?php echo 'uploads/'.$info['photo'] ?>" style="height:40px;width: 40px; float: left;">
                         <label style="float: left; margin-left: 20px;margin-top: 10px;"> <?php echo 'post at: ' . "$d"; ?></label><br>
                         <lable>
                             <p style=" float: left; margin-left: 10px;width: 60%; margin-top: 5%;"><?php echo"$po"; ?></p>
