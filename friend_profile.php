@@ -117,7 +117,8 @@ session_start();
             <div id="search" class="m">search</div>
         </div>
         <div id="cover" style=" background:url('<?php echo $friend_info['cover'] ?>'); background-size: cover;">
-            <div id="profile_pic" style=" background:url('<?php echo $friend_info['photo'] ?>'); background-size: cover;"> </div>
+            <?php $uploads='uploads/'?>
+            <div id="profile_pic" style=" background:url('<?php echo $uploads.$friend_info['photo'] ?>'); background-size: cover;"> </div>
             <input id="send_request" class="btn btn-info" type="button" value="<?php
             //check relation
             $check_friend = "select * from friends_req where sender_id = '" . $_SESSION['user_id'] . "' and recever_id='" . $_SESSION['id_friend'] .
@@ -153,7 +154,7 @@ session_start();
                 ?>
                 <div style="border-bottom: 1px; height: 60px ;">
                     <a href= "friend_profile.php?id=<?php echo$id_of_friend; ?> "style="margin-left: 20px;"> <?php echo $name_of_friend; ?></a>
-                    <img src="<?php echo $photo_of_friend; ?>" style="height:50px;width: 50px;border-radius: 10px; float: right;">
+                    <img src="<?php echo 'uploads/'.$photo_of_friend; ?>" style="height:50px;width: 50px;border-radius: 10px; float: right;">
                 </div>
                 <?php
             endwhile;
@@ -172,7 +173,7 @@ session_start();
                 ?> 
                 <div class="well" id="post">
                     <label style="height:90%; width: 95%;margin-left: 10px;">
-                        <img src="<?php echo $friend_info['photo'] ?>" style="height:40px;width: 40px; float: left;">
+                        <img src="<?php echo 'uploads/'.$friend_info['photo'] ?>" style="height:40px;width: 40px; float: left;">
                         <label style="float: left; margin-left: 20px;margin-top: 10px;"> <?php echo 'post at: ' . "$d"; ?></label><br>
                         <lable>
                             <p style=" float: left; margin-left: 10px;width: 60%; margin-top: 5%;"><?php echo"$po"; ?></p>

@@ -206,11 +206,16 @@ session_start();
                 $friends_query = mysqli_query($db_conn, $get_me_friend_info);
                 while ($piece_of_info = mysqli_fetch_array($friends_query)) :
                     $name_of_friend = $piece_of_info['username'];
+<<<<<<< HEAD
                     if ($piece_of_info['photo'] != "avatar.jpg") {
                         $photo_of_friend = "uploads/" . $piece_of_info['photo'];
                     } else {
                         $photo_of_friend = "image/" . $piece_of_info['photo'];
                     } $id_of_friend = $piece_of_info['id'];
+=======
+                    $photo_of_friend = 'uploads/'.$piece_of_info['photo'];
+                    $id_of_friend = $piece_of_info['id'];
+>>>>>>> 427ca8cb4de169547e2695ea4dabee3e21171339
 
                 endwhile;
                 ?>
