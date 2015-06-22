@@ -86,7 +86,7 @@ session_start();
                 $friends_query = mysqli_query($db_conn, $get_me_friend_info);
                 while ($piece_of_info = mysqli_fetch_array($friends_query)) :
                     $name_of_friend = $piece_of_info['username'];
-                    $photo_of_friend = $piece_of_info['photo'];
+                    $photo_of_friend = 'uploads\\'.$piece_of_info['photo'];
                     $id_of_friend = $piece_of_info['id'];
                 endwhile;
                 ?>
