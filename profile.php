@@ -135,27 +135,27 @@ session_start();
             </div>
             <a href="logout.php" style="float: right; margin-top: 20px;margin-right: 20px;">logout</a>
             <a href="profile.php" style="margin-top: 20px; margin-right:15px;float: right;"><?php echo$_SESSION['username']; ?></a>
-            <img src="<?php echo 'uploads/'.$info['photo']; ?>" style="width: 30px; height: 30px;margin-right:10px;float: right;margin-top: 15px;">
+            <img src="<?php echo 'uploads/' . $info['photo']; ?>" style="width: 30px; height: 30px;margin-right:10px;float: right;margin-top: 15px;">
             <a href="home.php" style=" margin-right:15px;margin-top: 20px;float: right;" >home</a>
 
         </div>
         <div id="cover" style=" background:url('<?php echo $info['cover'] ?>'); background-size: cover;">
-            <div id="profile_pic" style=" background:url('<?php echo 'uploads/'.$info['photo'] ?>'); background-size: cover;"> </div>
+            <div id="profile_pic" style=" background:url('<?php echo 'uploads/' . $info['photo'] ?>'); background-size: cover;"> </div>
             <button class="btn btn-info"style="margin-left: 30px;width: 200px ;border-radius: 20px; " data-toggle="modal" data-target=".bs-example-modal-sm">Upload photo</button>
-                        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content" style="height: 170px;width: 280px;">
-                                    <p style="color: blue;margin-top: 20px; margin-left: 20px;">upload new photo :D</p>
-                                    <form method="POST" enctype="multipart/form-data">
-                                        <div class="modal-footer">
-                                            <input type="file" name="new_photo" accept="image/*" style="margin-left: 40px; margin-top: 15px;"><br>
-                                            <button  class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <button name="upload_photo" class="btn btn-primary">upload</button>
-                                        </div>
-                                    </form>
-                                </div>
+            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content" style="height: 170px;width: 280px;">
+                        <p style="color: blue;margin-top: 20px; margin-left: 20px;">upload new photo :D</p>
+                        <form method="POST" enctype="multipart/form-data">
+                            <div class="modal-footer">
+                                <input type="file" name="new_photo" accept="image/*" style="margin-left: 40px; margin-top: 15px;"><br>
+                                <button  class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button name="upload_photo" class="btn btn-primary">upload</button>
                             </div>
-                        </div>         
+                        </form>
+                    </div>
+                </div>
+            </div>         
         </div>
         <?php
         if (isset($_POST['upload_photo'])) {
@@ -184,7 +184,7 @@ session_start();
                     exit;
                 }
                 $sql = "UPDATE users SET photo='$name' WHERE username='$user'";
-                mysqli_query($db_conn,$sql);
+                mysqli_query($db_conn, $sql);
                 // set proper permissions on the new file
                 chmod(UPLOAD_DIR . $name, 0644);
                 echo '<script> window.location.assign("profile.php");</script>';
@@ -206,8 +206,11 @@ session_start();
                 $friends_query = mysqli_query($db_conn, $get_me_friend_info);
                 while ($piece_of_info = mysqli_fetch_array($friends_query)) :
                     $name_of_friend = $piece_of_info['username'];
-                    $photo_of_friend = $piece_of_info['photo'];
-                    $id_of_friend = $piece_of_info['id'];
+                    if ($piece_of_info['photo'] != "avatar.jpg") {
+                        $photo_of_friend = "uploads/" . $piece_of_info['photo'];
+                    } else {
+                        $photo_of_friend = "image/" . $piece_of_info['photo'];
+                    } $id_of_friend = $piece_of_info['id'];
 
                 endwhile;
                 ?>
@@ -288,11 +291,11 @@ session_start();
                 ?> 
                 <div class="well" id="post">
                     <label style="height:90%; width: 95%;margin-left: 10px;">
-                        <img src="<?php echo 'uploads/'.$info['photo'] ?>" style="height:40px;width: 40px; float: left;">
+                        <img src="<?php echo 'uploads/' . $info['photo'] ?>" style="height:40px;width: 40px; float: left;">
                         <label style="float: left; margin-left: 20px;margin-top: 10px;"> <?php echo 'post at: ' . "$d"; ?></label><br>
                         <lable>
                             <p style=" float: left; margin-left: 10px;width: 60%; margin-top: 5%;"><?php echo"$po"; ?></p>
-                            <img src="<?php echo $u ?>" style="height:180px;width: 160px; float: right;">
+                            <img src="<?php echo 'uploads/' . $u ?>" style="height:180px;width: 160px; float: right;">
                         </lable>
                     </label>
                     <a href="#" style="color:blue; float: left; margin-left: 10px; " onclick="changeStyle(this)" id="<?php echo $id_post; ?>">like</a>
