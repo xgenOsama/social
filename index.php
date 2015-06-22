@@ -365,7 +365,7 @@ if(!empty($_SESSION['username'])){
                     $birthday = $_POST['year'] . "-" . $_POST['month'] . "-" . $_POST['day'];
                     $signup_quary = "insert into users (username,email,password,photo,country,birthday,gender,cover,role,signUP) values ('"
                             . $_POST['username'] . "' , '" . $_POST['email'] . "' , '" . $_POST['password'] .
-                            "' ," . "'image/avatar.jpg'" . ",'" . $_POST['country'] . "','" . $birthday . "' , '" . $_POST['gender'] . " '," . " 'image/cover.jpg' ,'0','" . $date . "' );";
+                            "' ," . "'avatar.jpg'" . ",'" . $_POST['country'] . "','" . $birthday . "' , '" . $_POST['gender'] . " '," . " 'image/cover.jpg' ,'0','" . $date . "' );";
                     mysqli_query($db_conn, $signup_quary);
                     echo '<script> window.location.assign("home.php");</script>';
                 }

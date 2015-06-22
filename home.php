@@ -69,7 +69,7 @@ session_start();
                 ?> 
                 <div style=" height: 90px; width:150px;border-radius: 10px; float: left;margin-right: 30px;margin-bottom: 10px; overflow-y:auto;" id="<?php echo $id; ?>">
                     <a href="friend_profile.php?id=<?php echo$id; ?>" style=" float: right; margin-top: 30px; "><?php echo $username; ?></a>
-                    <img src="<?php echo $photo ?>" style="height:80px;width: 80px;border-radius: 10px; float: left;">
+                    <img src="<?php echo 'uploads/'.$photo ?>" style="height:80px;width: 80px;border-radius: 10px; float: left;">
                 </div>
                 <?php
             endwhile;
