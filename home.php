@@ -4,8 +4,10 @@ session_start();
 ?>
 <html>
     <head>
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <title>home</title>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>        <title>home</title>
     </head>
     <style>
         #post{
@@ -16,6 +18,30 @@ session_start();
         }
     </style>
     <script>
+        function request_status(e) {
+            var id = "div" + e.id;
+            var value = e.value;
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var elem = document.getElementById(id);
+                    elem.parentNode.removeChild(elem);
+                }
+            };
+            xmlhttp.open("GET", "friend_req.php?r=" + value + "&id=" + e.id, true);
+            xmlhttp.send();
+        }
+
+        function get_friend_request() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById("all_friend_req").innerHTML = xmlhttp.responseText;
+                }
+            };
+            xmlhttp.open("GET", "get_friend_req.php", true);
+            xmlhttp.send();
+        }
         function find_friend(e) {
             if (e.length != 0) {
                 var xmlhttp = new XMLHttpRequest();
@@ -36,7 +62,7 @@ session_start();
         }
 
     </script>
-    <body>
+    <body onload="get_friend_request()">
         <?php
         $user = $_SESSION['username'];
         $get_info = "select * from users where username = '" . $user . " ' limit 1;";
@@ -48,19 +74,32 @@ session_start();
             <img src="image/newlogo.png" style="margin-left: 20px;margin-top: 10px;height:40px; width: 40px;float: left;" title="home">
             <img src="image/message.png" style="float: left; width:30px;height: 30px;margin-left: 20px; margin-top: 15px; " title="message">
             <img src="image/notification.png" style="float: left; width:30px;height: 30px;margin-left: 20px; margin-top: 15px; " title="notification">
-            <a href="logout.php" style=" margin-top: 25px; margin-right:70px;float: right;">logout</a>
+            <div class="btn-group" style="width: 30px; height: 30px;margin-right:150px;float: right;margin-top: 15px;">
+                <button name="setting" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    more<span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" style="float: right;">
+                    <li><a href="setting.php" >setting</a></li>
+                    <li><a href="#" >help</a></li>
+                    <li><a href="#">report a problem</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">connect us</a></li>
+                </ul>
+            </div>
+            <a href="logout.php" style=" margin-top: 25px; margin-right:30px;float: right;">logout</a>
             <a href="profile.php" style="margin-top: 25px; margin-right:15px;float: right;"><?php echo $_SESSION['username']; ?></a>
-            <img src="<?php echo'uploads/' . $info['photo']; ?>" style="width: 30px; height: 30px;margin-right:10px;float: right;margin-top: 20px;">
+            <img src="<?php echo'uploads/'. $info['photo']; ?>" style="width: 30px; height: 30px;margin-right:10px;float: right;margin-top: 20px;">
             <a href="home.php" style=" margin-right:15px;margin-top: 25px;float: right;" >home</a>
-            <div id="find_friends" style="overflow-y:auto; width: 250px; height: 70px;margin-right:150px;float: right;border-radius: 10px;"></div>
-            <input type="text" style=" margin-right:20px;margin-top: 20px;float: right;width: 330px; border-radius:10px;" placeholder="   search" onkeyup="find_friend(this.value);">
+            <input type="text" style=" margin-left:60px;margin-top: 20px;float: left;width: 330px; border-radius:10px;" placeholder="   search" onkeyup="find_friend(this.value);">
+            <ul id="find_friends" style="overflow-y:auto; width: 250px;margin-top: 10px; height: 50px;float: left; border-radius: 10px;"></ul>
 
         </div>
         <div  id="show_friend" style="height:60%; width: 20%;margin-left: 3%; float: left; " >
-            <h4 style="color: blue;">suggest friends :D </h4>
+            <div style="height: 50px; width: 200px; margin-top: 15px;" class="well"> <p style="color: blue;">suggest friends :D </p> </div>
             <?php
             //get posts
-            $suggest_friend = "select id ,username, photo from users where id != '" . $info['id'] . "' ORDER BY RAND() limit 6;";
+            $suggest_friend = "select id ,username, photo from users where id != '" . $info['id'] . "' ORDER BY RAND() limit 3;";
             $get_suggest_friend = mysqli_query($db_conn, $suggest_friend);
             while ($g = mysqli_fetch_array($get_suggest_friend)) :
                 $username = $g['username'];
@@ -88,12 +127,12 @@ session_start();
                     $name_of_friend = $piece_of_info['username'];
 
                     if ($piece_of_info['photo'] != "avatar.jpg") {
-                        $photo_of_friend = "uploads/".$piece_of_info['photo'];
+                        $photo_of_friend = "uploads/" . $piece_of_info['photo'];
                     } else {
                         $photo_of_friend = $piece_of_info['photo'];
                     }
 
-                    $photo_of_friend = 'uploads\\'.$piece_of_info['photo'];
+                    $photo_of_friend = 'uploads\\' . $piece_of_info['photo'];
 
                     $id_of_friend = $piece_of_info['id'];
                 endwhile;
@@ -146,14 +185,14 @@ session_start();
                     $file_name = $name;
 
                     if (!empty($_POST['newPost']) && !empty($_FILES["upload"])) {
-                        $add_post_quary = "insert into posts (post, upload, date,user_id)values (' " . $_POST['newPost'] . "','uploads/"
+                        $add_post_quary = "insert into posts (post, upload, date,user_id)values (' " . $_POST['newPost'] . "','"
                                 . $file_name . "','" . $date . "','" . $info['id'] . "');";
                         mysqli_query($db_conn, $add_post_quary);
                     } else if (empty($_POST['newPost']) && !empty($_FILES["upload"])) {
-                        $add_post_quary = "insert into posts (upload, date,user_id)values ('uploads/ "
+                        $add_post_quary = "insert into posts (upload, date,user_id)values ('"
                                 . $file_name . "','" . $date . "','" . $info['id'] . "');";
                         mysqli_query($db_conn, $add_post_quary);
-                    } else if (!empty($_POST['newPost']) && empty($_FILES["upload"])) {
+                    } else if (!empty($_POST['newPost'])) {
                         $add_post_quary = "insert into posts (post, date,user_id)values (' " . $_POST['newPost'] . "','"
                                 . $date . "','" . $info['id'] . "');";
                         mysqli_query($db_conn, $add_post_quary);
@@ -187,7 +226,7 @@ session_start();
                         <p style="float: left;margin-top: 7px;"> <?php echo 'post at: ' . "$d"; ?></p><br>
                         <div>
                             <p style=" float: left; margin-left: 10px;width: 60%; margin-top: 5%;"><?php echo"$po"; ?></p>
-                            <img src="<?php echo  $u ?>" style="height:180px;width: 160px; float: right;">
+                            <img src="<?php echo 'uploads/' . $u ?>" style="height:180px;width: 160px; float: right;">
                         </div>
                     </div>
                     <a href="#" style="color:blue; float: left; margin-left: 10px; " onclick="changeStyle('l1')" id="<?php echo $id_post; ?>">like</a>
@@ -196,5 +235,6 @@ session_start();
             endwhile;
             ?>
         </div>
+        <div style = "margin-left: 20px; height: 300px; width: 250px; float: left ; overflow-y:auto;" id="all_friend_req"></div>
     </body>
 </html>

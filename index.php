@@ -69,11 +69,9 @@ if(!empty($_SESSION['username'])){
             var id = object.id;
             if (id == "username") {
                 if (x != null) {
-                    var invalid_char = /[^a-z]/g;
-                    var invalid_num = /[^0-9]/g;
+                    var invalid_char = /[^A-Z0-9._-]/g;
                     var res1 = x.match(invalid_char);
-                    var res2 = x.match(invalid_num);
-                    if (res1 != null && res2 != null) {
+                    if (res1 != null) {
                         return document.getElementById("lable2").innerHTML = "invalid Enter only character",
                                 document.getElementById(id).value = "";
                     }
@@ -92,11 +90,9 @@ if(!empty($_SESSION['username'])){
             }
             if (id == "password") {
                 if (x != null) {
-                    var invalid_char = /[^a-z]/g;
-                    var invalid_num = /[^0-9]/g;
+                    var invalid_char = /[^A-Z0-9._-]/g;
                     var res1 = x.match(invalid_char);
-                    var res2 = x.match(invalid_num);
-                    if (res != null && res2 != null) {
+                    if (res1 != null) {
                         return document.getElementById("lable4").innerHTML = "invalid Enter only character",
                                 document.getElementById(id).value = "";
                     }
